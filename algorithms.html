@@ -1,0 +1,282 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Algorithms | OS Virtual Lab</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #f4f7fb;
+    color: #1f2937;
+}
+
+header {
+    background: #102a56;
+    color: white;
+    padding: 18px 7%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 4px 15px rgba(0,0,0,.15);
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.logo span {
+    color: #5db7ff;
+}
+
+nav {
+    display: flex;
+    gap: 8px;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    padding: 10px 15px;
+    border-radius: 8px;
+    transition: .3s;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+nav a:hover,
+nav a.active {
+    background: #2675d9;
+    transform: translateY(-2px);
+}
+
+.page-title {
+    background: linear-gradient(135deg,#102a56,#2477d5);
+    color: white;
+    text-align: center;
+    padding: 70px 20px;
+}
+
+.page-title h1 {
+    font-size: 45px;
+    margin-bottom: 10px;
+}
+
+.container {
+    width: 86%;
+    max-width: 1100px;
+    margin: 55px auto;
+}
+
+.algorithm-card {
+    background: white;
+    padding: 35px;
+    margin-bottom: 30px;
+    border-radius: 18px;
+    box-shadow: 0 8px 25px rgba(0,0,0,.08);
+    transition: .35s;
+}
+
+.algorithm-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 18px 35px rgba(25,85,150,.16);
+}
+
+.algorithm-card h2 {
+    color: #1455a0;
+    margin-bottom: 15px;
+}
+
+.algorithm-card p {
+    line-height: 1.8;
+    color: #5d697a;
+}
+
+.steps {
+    margin-top: 20px;
+    padding-left: 20px;
+}
+
+.steps li {
+    margin: 12px 0;
+    color: #4b5563;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    margin-top: 30px;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 8px 25px rgba(0,0,0,.08);
+}
+
+th {
+    background: #1455a0;
+    color: white;
+    padding: 17px;
+}
+
+td {
+    padding: 17px;
+    text-align: center;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+tr {
+    transition: .25s;
+}
+
+tr:hover td {
+    background: #eef6ff;
+}
+
+footer {
+    background: #102a56;
+    color: white;
+    text-align: center;
+    padding: 25px;
+    margin-top: 60px;
+}
+
+@media(max-width:800px) {
+    header {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    nav {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    table {
+        font-size: 13px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <div class="logo">OS <span>Virtual Lab</span></div>
+
+    <nav>
+        <a href="index.html">HOME</a>
+        <a href="about.html">ABOUT</a>
+        <a href="algorithms.html" class="active">ALGORITHMS</a>
+        <a href="sim.html">SIMULATOR</a>
+        <a href="help.html">HELP</a>
+    </nav>
+</header>
+
+<section class="page-title">
+    <h1>Disk Scheduling Algorithms</h1>
+    <p>SCAN and C-SCAN</p>
+</section>
+
+<section class="container">
+
+    <div class="algorithm-card">
+
+        <h2>🔄 SCAN Algorithm</h2>
+
+        <p>
+            SCAN is also called the elevator algorithm. The disk head
+            moves in one direction and services all requests encountered
+            along the path. After reaching the end of the disk, the
+            direction is reversed.
+        </p>
+
+        <ol class="steps">
+            <li>Start from the current head position.</li>
+            <li>Move in the selected direction.</li>
+            <li>Service requests encountered along the way.</li>
+            <li>Reach the end of the disk.</li>
+            <li>Reverse direction and continue servicing requests.</li>
+        </ol>
+
+    </div>
+
+    <div class="algorithm-card">
+
+        <h2>↔️ C-SCAN Algorithm</h2>
+
+        <p>
+            C-SCAN stands for Circular SCAN. The disk head moves in only
+            one direction. After reaching one end, it immediately moves
+            to the opposite end and continues servicing requests.
+        </p>
+
+        <ol class="steps">
+            <li>Start from the current head position.</li>
+            <li>Move in one direction.</li>
+            <li>Service requests along the path.</li>
+            <li>Reach the end of the disk.</li>
+            <li>Jump to the opposite end.</li>
+            <li>Continue servicing requests in the same direction.</li>
+        </ol>
+
+    </div>
+
+    <h2 style="text-align:center;color:#1455a0;margin-top:50px;">
+        SCAN vs C-SCAN
+    </h2>
+
+    <table>
+
+        <tr>
+            <th>Feature</th>
+            <th>SCAN</th>
+            <th>C-SCAN</th>
+        </tr>
+
+        <tr>
+            <td>Movement</td>
+            <td>Both directions</td>
+            <td>One direction</td>
+        </tr>
+
+        <tr>
+            <td>Direction Change</td>
+            <td>Yes</td>
+            <td>No</td>
+        </tr>
+
+        <tr>
+            <td>Fairness</td>
+            <td>Good</td>
+            <td>Very Good</td>
+        </tr>
+
+        <tr>
+            <td>Implementation</td>
+            <td>Simple</td>
+            <td>Slightly complex</td>
+        </tr>
+
+    </table>
+
+</section>
+
+<footer>
+    © 2026 OS Virtual Lab | Disk Scheduling Simulator
+</footer>
+
+</body>
+</html>
+```

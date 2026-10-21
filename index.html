@@ -1,0 +1,311 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Disk Scheduling | OS Virtual Lab</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #f4f7fb;
+    color: #1f2937;
+}
+
+/* NAVBAR */
+header {
+    background: #102a56;
+    color: white;
+    padding: 18px 7%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.logo span {
+    color: #5db7ff;
+}
+
+nav {
+    display: flex;
+    gap: 8px;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    padding: 10px 15px;
+    border-radius: 8px;
+    transition: 0.3s;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+nav a:hover,
+nav a.active {
+    background: #2675d9;
+    transform: translateY(-2px);
+}
+
+/* HERO */
+.hero {
+    min-height: 470px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white;
+    padding: 50px 20px;
+
+    background:
+        linear-gradient(135deg, rgba(16,42,86,.95), rgba(31,104,190,.88)),
+        radial-gradient(circle at top right, #5db7ff, transparent 40%);
+}
+
+.hero-content {
+    max-width: 850px;
+    animation: fadeUp 1s ease;
+}
+
+.hero h1 {
+    font-size: 58px;
+    margin-bottom: 15px;
+}
+
+.hero h2 {
+    font-size: 25px;
+    font-weight: normal;
+    margin-bottom: 20px;
+    color: #dceeff;
+}
+
+.hero p {
+    font-size: 18px;
+    line-height: 1.7;
+    margin-bottom: 30px;
+}
+
+/* BUTTON */
+.btn {
+    display: inline-block;
+    background: white;
+    color: #1555a0;
+    padding: 14px 28px;
+    border-radius: 30px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: 0.3s;
+    box-shadow: 0 8px 20px rgba(0,0,0,.2);
+}
+
+.btn:hover {
+    background: #5db7ff;
+    color: white;
+    transform: translateY(-5px) scale(1.03);
+    box-shadow: 0 12px 25px rgba(0,0,0,.3);
+}
+
+/* CONTENT */
+.container {
+    width: 86%;
+    max-width: 1150px;
+    margin: 60px auto;
+}
+
+.section-title {
+    text-align: center;
+    margin-bottom: 35px;
+}
+
+.section-title h2 {
+    color: #123b73;
+    font-size: 32px;
+    margin-bottom: 10px;
+}
+
+.section-title p {
+    color: #667085;
+}
+
+/* CARDS */
+.cards {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+}
+
+.card {
+    background: white;
+    padding: 35px;
+    border-radius: 18px;
+    box-shadow: 0 8px 25px rgba(0,0,0,.08);
+    border: 1px solid #e7edf5;
+    transition: 0.35s;
+    position: relative;
+    overflow: hidden;
+}
+
+.card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(90deg,#1769d1,#55b7ff);
+}
+
+.card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 18px 35px rgba(22,78,145,.18);
+}
+
+.card h3 {
+    color: #1455a0;
+    font-size: 24px;
+    margin-bottom: 15px;
+}
+
+.card p {
+    line-height: 1.7;
+    color: #596579;
+}
+
+.icon {
+    font-size: 42px;
+    margin-bottom: 15px;
+}
+
+/* FOOTER */
+footer {
+    background: #102a56;
+    color: white;
+    text-align: center;
+    padding: 25px;
+    margin-top: 60px;
+}
+
+/* ANIMATION */
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* RESPONSIVE */
+@media(max-width: 800px) {
+    header {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    nav {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .hero h1 {
+        font-size: 40px;
+    }
+
+    .cards {
+        grid-template-columns: 1fr;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <div class="logo">OS <span>Virtual Lab</span></div>
+
+    <nav>
+        <a href="index.html" class="active">HOME</a>
+        <a href="about.html">ABOUT</a>
+        <a href="algorithms.html">ALGORITHMS</a>
+        <a href="sim.html">SIMULATOR</a>
+        <a href="help.html">HELP</a>
+    </nav>
+</header>
+
+<section class="hero">
+    <div class="hero-content">
+        <h1>Disk Scheduling</h1>
+
+        <h2>Operating Systems Virtual Lab</h2>
+
+        <p>
+            Learn and visualize disk scheduling algorithms through
+            an interactive and user-friendly virtual simulator.
+        </p>
+
+        <a href="sim.html" class="btn">
+            START SIMULATION →
+        </a>
+    </div>
+</section>
+
+<section class="container">
+
+    <div class="section-title">
+        <h2>Disk Scheduling Algorithms</h2>
+        <p>Explore important disk scheduling techniques</p>
+    </div>
+
+    <div class="cards">
+
+        <div class="card">
+            <div class="icon">🔄</div>
+            <h3>SCAN Algorithm</h3>
+
+            <p>
+                The SCAN algorithm moves the disk head in one direction,
+                servicing requests along the way. When it reaches the
+                end of the disk, it reverses direction.
+            </p>
+        </div>
+
+        <div class="card">
+            <div class="icon">↔️</div>
+            <h3>C-SCAN Algorithm</h3>
+
+            <p>
+                C-SCAN moves the disk head in one direction only.
+                After reaching the end, it returns to the beginning
+                without servicing requests during the return.
+            </p>
+        </div>
+
+    </div>
+
+</section>
+
+<footer>
+    © 2026 OS Virtual Lab | Disk Scheduling Simulator
+</footer>
+
+</body>
+</html>
+```

@@ -1,0 +1,249 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About | OS Virtual Lab</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #f4f7fb;
+    color: #1f2937;
+}
+
+header {
+    background: #102a56;
+    color: white;
+    padding: 18px 7%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 4px 15px rgba(0,0,0,.15);
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.logo span {
+    color: #5db7ff;
+}
+
+nav {
+    display: flex;
+    gap: 8px;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    padding: 10px 15px;
+    border-radius: 8px;
+    transition: .3s;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+nav a:hover,
+nav a.active {
+    background: #2675d9;
+    transform: translateY(-2px);
+}
+
+.page-title {
+    background: linear-gradient(135deg,#102a56,#2477d5);
+    color: white;
+    text-align: center;
+    padding: 80px 20px;
+}
+
+.page-title h1 {
+    font-size: 45px;
+    margin-bottom: 12px;
+}
+
+.page-title p {
+    font-size: 18px;
+    color: #dceeff;
+}
+
+.container {
+    width: 86%;
+    max-width: 1100px;
+    margin: 55px auto;
+}
+
+.info-card {
+    background: white;
+    padding: 35px;
+    margin-bottom: 25px;
+    border-radius: 18px;
+    box-shadow: 0 8px 25px rgba(0,0,0,.08);
+    border-left: 5px solid #2374d0;
+    transition: .3s;
+}
+
+.info-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 15px 30px rgba(0,0,0,.12);
+}
+
+.info-card h2 {
+    color: #1455a0;
+    margin-bottom: 15px;
+}
+
+.info-card p {
+    line-height: 1.8;
+    color: #596579;
+}
+
+.objectives {
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap: 20px;
+}
+
+.objective {
+    background: white;
+    padding: 25px;
+    border-radius: 15px;
+    text-align: center;
+    transition: .3s;
+    box-shadow: 0 7px 20px rgba(0,0,0,.07);
+}
+
+.objective:hover {
+    transform: translateY(-8px);
+    background: #eef6ff;
+}
+
+.objective h3 {
+    color: #1555a0;
+    margin-bottom: 10px;
+}
+
+.objective p {
+    color: #687386;
+    line-height: 1.6;
+}
+
+footer {
+    background: #102a56;
+    color: white;
+    text-align: center;
+    padding: 25px;
+    margin-top: 60px;
+}
+
+@media(max-width:800px) {
+    header {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    nav {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .objectives {
+        grid-template-columns: 1fr;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <div class="logo">OS <span>Virtual Lab</span></div>
+
+    <nav>
+        <a href="index.html">HOME</a>
+        <a href="about.html" class="active">ABOUT</a>
+        <a href="algorithms.html">ALGORITHMS</a>
+        <a href="sim.html">SIMULATOR</a>
+        <a href="help.html">HELP</a>
+    </nav>
+</header>
+
+<section class="page-title">
+    <h1>About Disk Scheduling</h1>
+    <p>Understanding disk scheduling in Operating Systems</p>
+</section>
+
+<section class="container">
+
+    <div class="info-card">
+        <h2>What is Disk Scheduling?</h2>
+
+        <p>
+            Disk scheduling is an operating system technique used to
+            determine the order in which disk I/O requests should be
+            processed. The main objective is to reduce head movement,
+            improve disk performance and minimize access time.
+        </p>
+    </div>
+
+    <div class="info-card">
+        <h2>Purpose of this Virtual Lab</h2>
+
+        <p>
+            This virtual laboratory provides an interactive environment
+            for understanding SCAN and C-SCAN disk scheduling algorithms.
+            Students can enter disk requests and observe the resulting
+            seek sequence and total head movement.
+        </p>
+    </div>
+
+    <h2 style="text-align:center;color:#1455a0;margin:40px 0 25px;">
+        Project Objectives
+    </h2>
+
+    <div class="objectives">
+
+        <div class="objective">
+            <h3>📚 Learn</h3>
+            <p>
+                Understand the working of disk scheduling algorithms.
+            </p>
+        </div>
+
+        <div class="objective">
+            <h3>📊 Visualize</h3>
+            <p>
+                Observe the movement of the disk head graphically.
+            </p>
+        </div>
+
+        <div class="objective">
+            <h3>⚡ Compare</h3>
+            <p>
+                Compare the performance of SCAN and C-SCAN.
+            </p>
+        </div>
+
+    </div>
+
+</section>
+
+<footer>
+    © 2026 OS Virtual Lab | Disk Scheduling Simulator
+</footer>
+
+</body>
+</html>
+```

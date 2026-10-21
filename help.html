@@ -1,0 +1,300 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Help | OS Virtual Lab</title>
+
+<style>
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #f4f7fb;
+    color: #1f2937;
+}
+
+header {
+    background: #102a56;
+    color: white;
+    padding: 18px 7%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 4px 15px rgba(0,0,0,.15);
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.logo span {
+    color: #5db7ff;
+}
+
+nav {
+    display: flex;
+    gap: 8px;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    padding: 10px 15px;
+    border-radius: 8px;
+    transition: .3s;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+nav a:hover,
+nav a.active {
+    background: #2675d9;
+    transform: translateY(-2px);
+}
+
+.page-title {
+    background: linear-gradient(135deg,#102a56,#2477d5);
+    color: white;
+    text-align: center;
+    padding: 70px 20px;
+}
+
+.page-title h1 {
+    font-size: 45px;
+    margin-bottom: 10px;
+}
+
+.container {
+    width: 86%;
+    max-width: 1000px;
+    margin: 55px auto;
+}
+
+.help-card {
+    background: white;
+    padding: 28px;
+    margin-bottom: 20px;
+    border-radius: 16px;
+    box-shadow: 0 7px 22px rgba(0,0,0,.07);
+    transition: .3s;
+}
+
+.help-card:hover {
+    transform: translateX(8px);
+    box-shadow: 0 12px 30px rgba(20,80,150,.13);
+}
+
+.help-card h3 {
+    color: #1455a0;
+    margin-bottom: 12px;
+}
+
+.help-card p {
+    line-height: 1.7;
+    color: #5d697a;
+}
+
+.steps {
+    counter-reset: step;
+}
+
+.step {
+    display: flex;
+    gap: 18px;
+    align-items: flex-start;
+    margin: 20px 0;
+}
+
+.number {
+    min-width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: #1769d1;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+}
+
+footer {
+    background: #102a56;
+    color: white;
+    text-align: center;
+    padding: 25px;
+    margin-top: 60px;
+}
+
+@media(max-width:800px) {
+
+    header {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    nav {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+
+    <div class="logo">
+        OS <span>Virtual Lab</span>
+    </div>
+
+    <nav>
+        <a href="index.html">HOME</a>
+        <a href="about.html">ABOUT</a>
+        <a href="algorithms.html">ALGORITHMS</a>
+        <a href="sim.html">SIMULATOR</a>
+        <a href="help.html" class="active">HELP</a>
+    </nav>
+
+</header>
+
+<section class="page-title">
+
+    <h1>Help & Guide</h1>
+
+    <p>
+        Learn how to use the Disk Scheduling Simulator
+    </p>
+
+</section>
+
+<section class="container">
+
+    <div class="help-card">
+
+        <h3>📌 How to use the simulator?</h3>
+
+        <div class="steps">
+
+            <div class="step">
+
+                <div class="number">1</div>
+
+                <p>
+                    Enter the number of disk requests.
+                </p>
+
+            </div>
+
+            <div class="step">
+
+                <div class="number">2</div>
+
+                <p>
+                    Enter the total number of tracks in the disk.
+                </p>
+
+            </div>
+
+            <div class="step">
+
+                <div class="number">3</div>
+
+                <p>
+                    Enter the initial position of the disk head.
+                </p>
+
+            </div>
+
+            <div class="step">
+
+                <div class="number">4</div>
+
+                <p>
+                    Select the direction of disk head movement.
+                </p>
+
+            </div>
+
+            <div class="step">
+
+                <div class="number">5</div>
+
+                <p>
+                    Enter the track requests separated by commas.
+                </p>
+
+            </div>
+
+            <div class="step">
+
+                <div class="number">6</div>
+
+                <p>
+                    Select SCAN or C-SCAN and click
+                    <strong>Run</strong>.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="help-card">
+
+        <h3>💡 Example Input</h3>
+
+        <p>
+            Number of Requests: <strong>8</strong><br><br>
+
+            Total Tracks: <strong>200</strong><br><br>
+
+            Initial Head: <strong>53</strong><br><br>
+
+            Direction: <strong>Right</strong><br><br>
+
+            Requests:
+            <strong>
+                98, 183, 37, 122, 14, 124, 65, 67
+            </strong>
+        </p>
+
+    </div>
+
+
+    <div class="help-card">
+
+        <h3>⚠️ Important</h3>
+
+        <p>
+            Make sure that the number of requests entered matches
+            the number of track requests provided. Track numbers must
+            be within the range of the disk.
+        </p>
+
+    </div>
+
+</section>
+
+<footer>
+    © 2026 OS Virtual Lab | Disk Scheduling Simulator
+</footer>
+
+</body>
+</html>
+```

@@ -1,0 +1,669 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Simulator | OS Virtual Lab</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #f4f7fb;
+    color: #1f2937;
+}
+
+header {
+    background: #102a56;
+    color: white;
+    padding: 18px 7%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 4px 15px rgba(0,0,0,.15);
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.logo span {
+    color: #5db7ff;
+}
+
+nav {
+    display: flex;
+    gap: 8px;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    padding: 10px 15px;
+    border-radius: 8px;
+    transition: .3s;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+nav a:hover,
+nav a.active {
+    background: #2675d9;
+    transform: translateY(-2px);
+}
+
+.page-title {
+    background: linear-gradient(135deg,#102a56,#2477d5);
+    color: white;
+    text-align: center;
+    padding: 55px 20px;
+}
+
+.page-title h1 {
+    font-size: 42px;
+    margin-bottom: 10px;
+}
+
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 45px auto;
+}
+
+/* SIMULATOR */
+.simulator {
+    display: grid;
+    grid-template-columns: 360px 1fr;
+    gap: 25px;
+}
+
+.panel {
+    background: white;
+    padding: 28px;
+    border-radius: 18px;
+    box-shadow: 0 8px 25px rgba(0,0,0,.08);
+}
+
+.panel h2 {
+    color: #1455a0;
+    margin-bottom: 22px;
+}
+
+label {
+    display: block;
+    margin-top: 16px;
+    margin-bottom: 7px;
+    font-weight: bold;
+    color: #344054;
+}
+
+input,
+select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #d5dce5;
+    border-radius: 8px;
+    outline: none;
+    transition: .25s;
+    font-size: 15px;
+}
+
+input:focus,
+select:focus {
+    border-color: #2477d5;
+    box-shadow: 0 0 0 3px rgba(36,119,213,.12);
+}
+
+.buttons {
+    display: flex;
+    gap: 10px;
+    margin-top: 25px;
+}
+
+button {
+    flex: 1;
+    padding: 13px;
+    border: none;
+    border-radius: 9px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 15px;
+    transition: .3s;
+}
+
+.run {
+    background: #1769d1;
+    color: white;
+}
+
+.run:hover {
+    background: #0e4e9f;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 18px rgba(23,105,209,.3);
+}
+
+.clear {
+    background: #e9eef5;
+    color: #344054;
+}
+
+.clear:hover {
+    background: #d7e0eb;
+    transform: translateY(-3px);
+}
+
+/* RESULTS */
+.result-box {
+    background: #f8fbff;
+    border: 1px solid #dbeafe;
+    padding: 20px;
+    border-radius: 12px;
+    margin-bottom: 20px;
+}
+
+.result-box h3 {
+    color: #1455a0;
+    margin-bottom: 12px;
+}
+
+.result-item {
+    padding: 12px 0;
+    border-bottom: 1px solid #e5eaf0;
+}
+
+.result-item:last-child {
+    border-bottom: none;
+}
+
+.result-item strong {
+    color: #334155;
+}
+
+#sequence {
+    color: #1769d1;
+    font-weight: bold;
+    line-height: 1.8;
+}
+
+canvas {
+    width: 100%;
+    max-width: 100%;
+    background: white;
+    border-radius: 12px;
+    border: 1px solid #e1e7ef;
+    margin-top: 10px;
+}
+
+footer {
+    background: #102a56;
+    color: white;
+    text-align: center;
+    padding: 25px;
+    margin-top: 60px;
+}
+
+@media(max-width:900px) {
+
+    header {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    nav {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .simulator {
+        grid-template-columns: 1fr;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+
+    <div class="logo">
+        OS <span>Virtual Lab</span>
+    </div>
+
+    <nav>
+        <a href="index.html">HOME</a>
+        <a href="about.html">ABOUT</a>
+        <a href="algorithms.html">ALGORITHMS</a>
+        <a href="sim.html" class="active">SIMULATOR</a>
+        <a href="help.html">HELP</a>
+    </nav>
+
+</header>
+
+<section class="page-title">
+    <h1>Disk Scheduling Simulator</h1>
+    <p>Simulate SCAN and C-SCAN algorithms</p>
+</section>
+
+<section class="container">
+
+<div class="simulator">
+
+<!-- INPUT PANEL -->
+
+<div class="panel">
+
+<h2>⚙ Simulation Settings</h2>
+
+<label>Number of Requests</label>
+<input type="number" id="requestCount" value="8">
+
+<label>Total Tracks</label>
+<input type="number" id="diskSize" value="200">
+
+<label>Initial Head Position</label>
+<input type="number" id="head" value="53">
+
+<label>Direction</label>
+
+<select id="direction">
+    <option value="right">Right</option>
+    <option value="left">Left</option>
+</select>
+
+<label>Track Requests</label>
+
+<input
+    type="text"
+    id="requests"
+    value="98,183,37,122,14,124,65,67">
+
+<label>Algorithm</label>
+
+<select id="algorithm">
+    <option value="scan">SCAN</option>
+    <option value="cscan">C-SCAN</option>
+</select>
+
+<div class="buttons">
+
+<button class="run" onclick="runSimulation()">
+    ▶ Run
+</button>
+
+<button class="clear" onclick="clearSimulation()">
+    Clear
+</button>
+
+</div>
+
+</div>
+
+
+<!-- RESULT PANEL -->
+
+<div class="panel">
+
+<h2>📊 Simulation Result</h2>
+
+<div class="result-box">
+
+<div class="result-item">
+<strong>Algorithm:</strong>
+<span id="algorithmResult">-</span>
+</div>
+
+<div class="result-item">
+<strong>Number of Requests:</strong>
+<span id="countResult">-</span>
+</div>
+
+<div class="result-item">
+<strong>Total Head Movement:</strong>
+<span id="movementResult">-</span>
+</div>
+
+<div class="result-item">
+<strong>Seek Sequence:</strong>
+
+<div id="sequence">
+-
+</div>
+
+</div>
+
+</div>
+
+<h2>📈 Head Movement Graph</h2>
+
+<canvas id="graph" width="700" height="350"></canvas>
+
+</div>
+
+</div>
+
+</section>
+
+<footer>
+    © 2026 OS Virtual Lab | Disk Scheduling Simulator
+</footer>
+
+
+<script>
+
+function calculate(sequence, head) {
+
+    let movement = 0;
+
+    for (let i = 0; i < sequence.length; i++) {
+
+        movement += Math.abs(sequence[i] - head);
+
+        head = sequence[i];
+    }
+
+    return movement;
+}
+
+
+function scan(requests, head, diskSize, direction) {
+
+    let left = requests.filter(x => x < head).sort((a,b) => b-a);
+    let right = requests.filter(x => x >= head).sort((a,b) => a-b);
+
+    let sequence = [head];
+
+    if (direction === "right") {
+
+        sequence = sequence.concat(right);
+
+        if (sequence[sequence.length - 1] !== diskSize - 1)
+            sequence.push(diskSize - 1);
+
+        sequence = sequence.concat(left);
+
+    } else {
+
+        sequence = sequence.concat(left);
+
+        if (sequence[sequence.length - 1] !== 0)
+            sequence.push(0);
+
+        sequence = sequence.concat(right);
+    }
+
+    return sequence;
+}
+
+
+function cscan(requests, head, diskSize, direction) {
+
+    let left = requests.filter(x => x < head).sort((a,b) => a-b);
+    let right = requests.filter(x => x >= head).sort((a,b) => a-b);
+
+    let sequence = [head];
+
+    if (direction === "right") {
+
+        sequence = sequence.concat(right);
+
+        if (sequence[sequence.length - 1] !== diskSize - 1)
+            sequence.push(diskSize - 1);
+
+        sequence.push(0);
+
+        sequence = sequence.concat(left);
+
+    } else {
+
+        left.reverse();
+        right.reverse();
+
+        sequence = sequence.concat(left);
+
+        if (sequence[sequence.length - 1] !== 0)
+            sequence.push(0);
+
+        sequence.push(diskSize - 1);
+
+        sequence = sequence.concat(right);
+    }
+
+    return sequence;
+}
+
+
+function runSimulation() {
+
+    let requestCount =
+        parseInt(document.getElementById("requestCount").value);
+
+    let diskSize =
+        parseInt(document.getElementById("diskSize").value);
+
+    let head =
+        parseInt(document.getElementById("head").value);
+
+    let direction =
+        document.getElementById("direction").value;
+
+    let requests =
+        document.getElementById("requests").value
+        .split(",")
+        .map(Number)
+        .filter(x => !isNaN(x));
+
+    let algorithm =
+        document.getElementById("algorithm").value;
+
+
+    if (requests.length !== requestCount) {
+
+        alert(
+            "Number of requests does not match the request count."
+        );
+
+        return;
+    }
+
+
+    if (head < 0 || head >= diskSize) {
+
+        alert("Initial head position is invalid.");
+
+        return;
+    }
+
+
+    let sequence;
+
+    if (algorithm === "scan") {
+
+        sequence = scan(
+            requests,
+            head,
+            diskSize,
+            direction
+        );
+
+        document.getElementById("algorithmResult")
+            .innerText = "SCAN";
+
+    } else {
+
+        sequence = cscan(
+            requests,
+            head,
+            diskSize,
+            direction
+        );
+
+        document.getElementById("algorithmResult")
+            .innerText = "C-SCAN";
+    }
+
+
+    let movement =
+        calculate(sequence, head);
+
+
+    document.getElementById("countResult")
+        .innerText = requestCount;
+
+    document.getElementById("movementResult")
+        .innerText = movement + " tracks";
+
+    document.getElementById("sequence")
+        .innerText = sequence.join(" → ");
+
+    drawGraph(sequence, diskSize);
+}
+
+
+function drawGraph(sequence, diskSize) {
+
+    let canvas =
+        document.getElementById("graph");
+
+    let ctx =
+        canvas.getContext("2d");
+
+    ctx.clearRect(
+        0,
+        0,
+        canvas.width,
+        canvas.height
+    );
+
+
+    let padding = 45;
+
+    let width =
+        canvas.width - padding * 2;
+
+    let height =
+        canvas.height - padding * 2;
+
+
+    /* GRID */
+
+    ctx.strokeStyle = "#dce3ec";
+
+    for (let i = 0; i <= 10; i++) {
+
+        let y =
+            padding + (height / 10) * i;
+
+        ctx.beginPath();
+
+        ctx.moveTo(padding, y);
+
+        ctx.lineTo(canvas.width - padding, y);
+
+        ctx.stroke();
+    }
+
+
+    /* PATH */
+
+    ctx.beginPath();
+
+    sequence.forEach((track, index) => {
+
+        let x =
+            padding +
+            (track / (diskSize - 1)) * width;
+
+        let y =
+            padding +
+            (index / Math.max(sequence.length - 1, 1))
+            * height;
+
+        if (index === 0)
+            ctx.moveTo(x, y);
+        else
+            ctx.lineTo(x, y);
+    });
+
+    ctx.strokeStyle = "#1769d1";
+
+    ctx.lineWidth = 3;
+
+    ctx.stroke();
+
+
+    /* POINTS */
+
+    sequence.forEach((track, index) => {
+
+        let x =
+            padding +
+            (track / (diskSize - 1)) * width;
+
+        let y =
+            padding +
+            (index / Math.max(sequence.length - 1, 1))
+            * height;
+
+        ctx.beginPath();
+
+        ctx.arc(x, y, 5, 0, Math.PI * 2);
+
+        ctx.fillStyle = "#1769d1";
+
+        ctx.fill();
+
+        ctx.fillStyle = "#333";
+
+        ctx.font = "12px Arial";
+
+        ctx.fillText(
+            track,
+            x + 7,
+            y - 7
+        );
+    });
+}
+
+
+function clearSimulation() {
+
+    document.getElementById("algorithmResult")
+        .innerText = "-";
+
+    document.getElementById("countResult")
+        .innerText = "-";
+
+    document.getElementById("movementResult")
+        .innerText = "-";
+
+    document.getElementById("sequence")
+        .innerText = "-";
+
+    let canvas =
+        document.getElementById("graph");
+
+    canvas.getContext("2d")
+        .clearRect(
+            0,
+            0,
+            canvas.width,
+            canvas.height
+        );
+}
+
+</script>
+
+</body>
+</html>
+```
